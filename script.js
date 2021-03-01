@@ -39,10 +39,10 @@ const initial = () => {
 };
 initial();
 
-// New Game
+// NEW GAME BUTTON
 newgame.addEventListener("click", initial);
 
-// Switch Player
+// SWITCH PLAYER
 const switchPlayer = () => {
   player0.classList.toggle("active");
   player1.classList.toggle("active");
@@ -87,8 +87,10 @@ hold.addEventListener("click", function () {
       hold.classList.add("hidden");
       alert.textContent = "RESET THE GAME";
     }
+    // ALERT TO ROLL THE DICE
   } else if (currentScore === 0) {
     alert.textContent = "ROLL THE DICE";
+    // CONTINUE THE GAME
   } else {
     currentScore = 0;
     dice.classList.add("hidden");
