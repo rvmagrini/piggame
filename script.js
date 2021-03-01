@@ -1,99 +1,61 @@
 "use strict";
 
-// Tagging elements
-const player0 = document.querySelector(".player0");
-const player1 = document.querySelector(".player1");
-const score0 = document.querySelector(".score0");
-const score1 = document.querySelector(".score1");
-const current0 = document.querySelector(".current0");
-const current1 = document.querySelector(".current1");
-const newgame = document.querySelector(".newgame");
-const dice = document.querySelector(".dice");
-const roll = document.querySelector(".roll");
-const hold = document.querySelector(".hold");
-const alert = document.querySelector(".alert");
-
-let currentScore, scores, activePlayer;
-
-const initial = () => {
-  currentScore = 0;
-  scores = [0, 0];
-  activePlayer = Math.floor(Math.random() * 2);
-  score0.textContent = 0;
-  score1.textContent = 0;
-  current0.textContent = 0;
-  current1.textContent = 0;
-
-  dice.classList.add("hidden");
-  roll.classList.remove("hidden");
-  hold.classList.remove("hidden");
-  player0.classList.remove("winner");
-  player1.classList.remove("winner");
-  player0.classList.remove("active");
-  player1.classList.remove("active");
-  alert.textContent = "";
-
-  activePlayer === 0
-    ? player0.classList.add("active")
-    : player1.classList.add("active");
-};
-initial();
-
-// NEW GAME BUTTON
-newgame.addEventListener("click", initial);
-
-// SWITCH PLAYER
-const switchPlayer = () => {
-  player0.classList.toggle("active");
-  player1.classList.toggle("active");
-  activePlayer = activePlayer === 0 ? 1 : 0;
-};
-
-// ROLL DICE
-roll.addEventListener("click", function () {
-  const random = Math.floor(Math.random() * 6 + 1);
-  dice.src = `img/dice${random}.png`;
-  dice.classList.remove("hidden");
-  alert.textContent = "";
-  if (random === 1) {
-    currentScore = 0;
-    document.querySelector(
-      `.current${activePlayer}`
-    ).textContent = currentScore;
-    switchPlayer();
-  } else {
-    currentScore += random;
-    document.querySelector(
-      `.current${activePlayer}`
-    ).textContent = currentScore;
+// Check Prime
+const isPrime = (number) => {
+  if (number === 1 || number === 0) {
+    return false;
   }
-});
 
-// HOLD
-hold.addEventListener("click", function () {
-  if (currentScore !== 0) {
-    scores[activePlayer] += currentScore;
-    document.querySelector(`.score${activePlayer}`).textContent =
-      scores[activePlayer];
-    document.querySelector(`.current${activePlayer}`).textContent = 0;
-
-    // FINISH GAME
-    if (scores[activePlayer] >= 100) {
-      document.querySelector(`.player${activePlayer}`).classList.add("winner");
-      player0.classList.remove("active");
-      player1.classList.remove("active");
-      dice.classList.add("hidden");
-      roll.classList.add("hidden");
-      hold.classList.add("hidden");
-      alert.textContent = "RESET THE GAME";
+  for (let i = 2; i < number; i++) {
+    if (number % i === 0) {
+      return false;
     }
-    // ALERT TO ROLL THE DICE
-  } else if (currentScore === 0) {
-    alert.textContent = "ROLL THE DICE";
-    // CONTINUE THE GAME
-  } else {
-    currentScore = 0;
-    dice.classList.add("hidden");
-    switchPlayer();
+  }
+  return true;
+};
+
+// Handle Check Click
+document.querySelector("#checkbtn").addEventListener("click", function () {
+  let txtNum = document.querySelector("#txtnum").value;
+  let outcomeCheck = document.querySelector("#outcomecheck");
+  let num = Number(txtNum);
+
+  if (num > 0) {
+    isPrime(num)
+      ? (outcomeCheck.innerHTML = `Yes, ${num} is a prime number.`)
+      : (outcomeCheck.innerHTML = `No, ${num} is not a prime number.`);
   }
 });
+
+// Find Out all prime numbers between the set numbers
+
+document.querySelector("#findbtn").addEventListener("click", function () {
+  let txtFirstNum = document.querySelector("#txtfirstnum").value;
+  let txtLastNum = document.querySelector("#txtlastnum").value;
+  let outcomeFind = document.querySelector("#outcomefind");
+  let firstNum = Number(txtFirstNum);
+  let lastNum = Number(txtLastNum);
+
+  outcomeFind.innerHTML = ``;
+
+  if (firstNum >= lastNum) {
+    outcomeFind.innerHTML = `The first typed number has to be lower than the second.`;
+  } else {
+    let primeArr = [];
+
+    for (let i = firstNum; i <= lastNum; i++) {
+      isPrime(i) && primeArr.push(i);
+    }
+
+    const primeStr = primeArr.join(", ");
+    console.log(primeStr);
+
+    outcomeFind.innerHTML += `${primeStr}`;
+  }
+});
+
+// for (let i = 0; i <= 100; i++) {
+//   isPrime(i) && primeArr.push(i);
+// }
+
+// console.log(primeArr);
