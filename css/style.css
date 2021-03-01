@@ -32,9 +32,22 @@ h2 {
   float: right;
 }
 
+.score {
+  font-size: 5rem;
+}
+
+.current {
+  background-color: #008891;
+  border-radius: 16px;
+  font-size: 2rem;
+  width: 170px;
+  padding: 15px;
+  margin: 80px auto 20px auto;
+}
+
 .icon {
   width: 50px;
-  border-radius: 20px;
+  border-radius: 15px;
 }
 
 .icon:hover {
