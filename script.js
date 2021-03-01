@@ -25,6 +25,10 @@ const initial = () => {
   current1.textContent = 0;
 
   dice.classList.add("hidden");
+  roll.classList.remove("hidden");
+  hold.classList.remove("hidden");
+  alert.textContent = "";
+  document.getElementById(`h2player${activePlayer}`).classList.add("active");
 };
 initial();
 
@@ -33,8 +37,6 @@ newgame.addEventListener("click", initial);
 
 // Switch Player
 const switchPlayer = () => {
-  document.querySelector(`.h2player${activePlayer}`).style.backgroundColor =
-    "#96bb7c";
   activePlayer = activePlayer === 0 ? 1 : 0;
 };
 
@@ -69,6 +71,9 @@ hold.addEventListener("click", function () {
     if (scores[activePlayer] >= 100) {
       console.log("you won");
       dice.classList.add("hidden");
+      roll.classList.add("hidden");
+      hold.classList.add("hidden");
+      alert.textContent = "RESET THE GAME";
     }
     currentScore = 0;
     dice.classList.add("hidden");

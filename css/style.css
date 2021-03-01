@@ -20,6 +20,10 @@ h2 {
   border-radius: 10px;
 }
 
+.active {
+  background-color: "#96bb7c";
+}
+
 .player {
   padding: 20px;
   width: 35%;
