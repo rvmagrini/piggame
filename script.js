@@ -18,3 +18,15 @@ const initial = () => {
   current0.textContent = 0;
   current1.textContent = 0;
 };
+initial();
+
+roll.addEventListener("click", function () {
+  const random = Math.floor(Math.random() * 6 + 1);
+  dice.src = `img/dice${random}.png`;
+  if (random === 1) {
+    console.log("Switched");
+  } else {
+  }
+});
+
+console.log();
