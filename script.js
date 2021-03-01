@@ -27,8 +27,15 @@ const initial = () => {
   dice.classList.add("hidden");
   roll.classList.remove("hidden");
   hold.classList.remove("hidden");
+  player0.classList.remove("winner");
+  player1.classList.remove("winner");
+  player0.classList.remove("active");
+  player1.classList.remove("active");
   alert.textContent = "";
-  document.querySelector(`.player${activePlayer}`).classList.add("active");
+
+  activePlayer === 0
+    ? player0.classList.add("active")
+    : player1.classList.add("active");
 };
 initial();
 
@@ -70,18 +77,21 @@ hold.addEventListener("click", function () {
       scores[activePlayer];
     document.querySelector(`.current${activePlayer}`).textContent = 0;
 
-    // Finish game
-    if (scores[activePlayer] >= 100) {
+    // FINISH GAME
+    if (scores[activePlayer] >= 10) {
       document.querySelector(`.player${activePlayer}`).classList.add("winner");
+      player0.classList.remove("active");
+      player1.classList.remove("active");
       dice.classList.add("hidden");
       roll.classList.add("hidden");
       hold.classList.add("hidden");
       alert.textContent = "RESET THE GAME";
     }
+  } else if (currentScore === 0) {
+    alert.textContent = "ROLL THE DICE";
+  } else {
     currentScore = 0;
     dice.classList.add("hidden");
     switchPlayer();
-  } else {
-    alert.textContent = "ROLL THE DICE";
   }
 });
