@@ -28,7 +28,7 @@ const initial = () => {
   roll.classList.remove("hidden");
   hold.classList.remove("hidden");
   alert.textContent = "";
-  document.getElementById(`h2player${activePlayer}`).classList.add("active");
+  document.querySelector(`.player${activePlayer}`).classList.add("active");
 };
 initial();
 
@@ -37,10 +37,12 @@ newgame.addEventListener("click", initial);
 
 // Switch Player
 const switchPlayer = () => {
+  player0.classList.toggle("active");
+  player1.classList.toggle("active");
   activePlayer = activePlayer === 0 ? 1 : 0;
 };
 
-// Roll dice
+// ROLL DICE
 roll.addEventListener("click", function () {
   const random = Math.floor(Math.random() * 6 + 1);
   dice.src = `img/dice${random}.png`;
@@ -60,6 +62,7 @@ roll.addEventListener("click", function () {
   }
 });
 
+// HOLD
 hold.addEventListener("click", function () {
   if (currentScore !== 0) {
     scores[activePlayer] += currentScore;
@@ -69,7 +72,7 @@ hold.addEventListener("click", function () {
 
     // Finish game
     if (scores[activePlayer] >= 100) {
-      console.log("you won");
+      document.querySelector(`.player${activePlayer}`).classList.add("winner");
       dice.classList.add("hidden");
       roll.classList.add("hidden");
       hold.classList.add("hidden");
