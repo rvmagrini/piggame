@@ -22,26 +22,54 @@ const initial = () => {
   score1.textContent = 0;
   current0.textContent = 0;
   current1.textContent = 0;
+
+  dice.classList.add("hidden");
 };
 initial();
 
 // New Game
 newgame.addEventListener("click", initial);
 
+// Switch Player
+const switchPlayer = () => {
+  console.log("switched");
+  activePlayer = activePlayer === 0 ? 1 : 0;
+};
+
+// Roll dice
 roll.addEventListener("click", function () {
   const random = Math.floor(Math.random() * 6 + 1);
   dice.src = `img/dice${random}.png`;
+  dice.classList.remove("hidden");
   if (random === 1) {
-    // SWITCH
-    console.log("Switched");
+    currentScore = 0;
+    document.querySelector(
+      `.current${activePlayer}`
+    ).textContent = currentScore;
+    switchPlayer();
   } else {
     currentScore += random;
-    current0.textContent = currentScore;
+    document.querySelector(
+      `.current${activePlayer}`
+    ).textContent = currentScore;
   }
 });
 
 hold.addEventListener("click", function () {
-  scores[0] = currentScore;
-  score0.textContent = scores[0];
-  console.log(scores);
+  if (currentScore !== 0) {
+    scores[activePlayer] += currentScore;
+    document.querySelector(`.score${activePlayer}`).textContent =
+      scores[activePlayer];
+    document.querySelector(`.current${activePlayer}`).textContent = 0;
+
+    currentScore = 0;
+    dice.classList.add("hidden");
+    switchPlayer();
+  } else {
+    console.log("roll the dice");
+  }
+
+  if (scores[activePlayer] >= 100) {
+    console.log("you win");
+  }
 });
