@@ -1,22 +1,30 @@
 * {
+  margin: 0;
   padding: 0;
   margin: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
 }
 
 body {
   background-color: #dfdfdf;
   font-family: "Roboto Mono", monospace;
+  height: 100vh;
+  padding: 80px;
 }
 
 main {
-  width: 85vw;
-  padding-top: 100px;
+  width: 90vw;
   margin: auto;
   text-align: center;
 }
 
 h2 {
-  font-size: 3.5rem;
+  font-size: 5rem;
   border-radius: 10px;
 }
 
@@ -42,20 +50,25 @@ section {
 }
 
 .score {
-  font-size: 5rem;
+  font-size: 8rem;
 }
 
 .current {
   background-color: #008891;
   border-radius: 16px;
-  font-size: 2rem;
-  width: 170px;
+  font-size: 3.5rem;
+  width: 190px;
   padding: 15px;
   margin: 80px auto 20px auto;
 }
 
+.instruct {
+  color: #7e7474;
+  font-size: 1rem;
+}
+
 .icon {
-  width: 50px;
+  width: 80px;
   border-radius: 15px;
 }
 
@@ -65,36 +78,38 @@ section {
 
 .newgame {
   position: absolute;
-  top: 7.5rem;
+  top: 9rem;
   left: 50%;
   transform: translateX(-50%);
 }
 
 .dice {
   position: absolute;
-  top: 13rem;
+  top: 20rem;
   left: 50%;
   transform: translateX(-50%);
+  width: 110px;
 }
 
 .roll {
   position: absolute;
-  top: 23.5rem;
+  top: 35rem;
   left: 50%;
   transform: translateX(-50%);
 }
 
 .hold {
   position: absolute;
-  top: 29rem;
+  top: 45rem;
   left: 50%;
   transform: translateX(-50%);
 }
 
 .alert {
+  font-size: 2rem;
   color: #cc7351;
   position: absolute;
-  top: 34rem;
+  top: 57rem;
   left: 50%;
   transform: translateX(-50%);
 }

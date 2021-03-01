@@ -13,9 +13,10 @@ const roll = document.querySelector(".roll");
 const hold = document.querySelector(".hold");
 const alert = document.querySelector(".alert");
 
-let currentScore, scores, activePlayer;
+let currentScore, scores, activePlayer, playing;
 
 const initial = () => {
+  playing = true;
   currentScore = 0;
   scores = [0, 0];
   activePlayer = Math.floor(Math.random() * 2);
@@ -51,50 +52,55 @@ const switchPlayer = () => {
 
 // ROLL DICE
 const rolldice = () => {
-  const random = Math.floor(Math.random() * 6 + 1);
-  dice.src = `img/dice${random}.png`;
-  dice.classList.remove("hidden");
-  alert.textContent = "";
-  if (random === 1) {
-    currentScore = 0;
-    document.querySelector(
-      `.current${activePlayer}`
-    ).textContent = currentScore;
-    switchPlayer();
-  } else {
-    currentScore += random;
-    document.querySelector(
-      `.current${activePlayer}`
-    ).textContent = currentScore;
+  if (playing) {
+    const random = Math.floor(Math.random() * 6 + 1);
+    dice.src = `img/dice${random}.png`;
+    dice.classList.remove("hidden");
+    alert.textContent = "";
+    if (random === 1) {
+      currentScore = 0;
+      document.querySelector(
+        `.current${activePlayer}`
+      ).textContent = currentScore;
+      switchPlayer();
+    } else {
+      currentScore += random;
+      document.querySelector(
+        `.current${activePlayer}`
+      ).textContent = currentScore;
+    }
   }
 };
 roll.addEventListener("click", rolldice);
 
 // HOLD
 const holdCurrent = () => {
-  if (currentScore !== 0) {
-    scores[activePlayer] += currentScore;
-    document.querySelector(`.score${activePlayer}`).textContent =
-      scores[activePlayer];
-    document.querySelector(`.current${activePlayer}`).textContent = 0;
-  } else {
-    alert.textContent = "ROLL THE DICE";
-    return;
-  }
+  if (playing) {
+    if (currentScore !== 0) {
+      scores[activePlayer] += currentScore;
+      document.querySelector(`.score${activePlayer}`).textContent =
+        scores[activePlayer];
+      document.querySelector(`.current${activePlayer}`).textContent = 0;
+    } else {
+      alert.textContent = "ROLL THE DICE";
+      return;
+    }
 
-  // FINISH GAME
-  if (scores[activePlayer] >= 100) {
-    document.querySelector(`.player${activePlayer}`).classList.add("winner");
-    player0.classList.remove("active");
-    player1.classList.remove("active");
-    dice.classList.add("hidden");
-    roll.classList.add("hidden");
-    hold.classList.add("hidden");
-    alert.textContent = "[RESET THE GAME : PRESS 'N'])";
-  } else {
-    currentScore = 0;
-    dice.classList.add("hidden");
-    switchPlayer();
+    // FINISH GAME
+    if (scores[activePlayer] >= 100) {
+      document.querySelector(`.player${activePlayer}`).classList.add("winner");
+      player0.classList.remove("active");
+      player1.classList.remove("active");
+      dice.classList.add("hidden");
+      roll.classList.add("hidden");
+      hold.classList.add("hidden");
+      alert.textContent = "'N' RESET THE GAME";
+      playing = false;
+    } else {
+      currentScore = 0;
+      dice.classList.add("hidden");
+      switchPlayer();
+    }
   }
 };
 hold.addEventListener("click", holdCurrent);
