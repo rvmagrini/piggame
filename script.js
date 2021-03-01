@@ -78,7 +78,7 @@ hold.addEventListener("click", function () {
     document.querySelector(`.current${activePlayer}`).textContent = 0;
 
     // FINISH GAME
-    if (scores[activePlayer] >= 10) {
+    if (scores[activePlayer] >= 100) {
       document.querySelector(`.player${activePlayer}`).classList.add("winner");
       player0.classList.remove("active");
       player1.classList.remove("active");
