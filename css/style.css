@@ -16,7 +16,8 @@ main {
 }
 
 h2 {
-  font-size: 4rem;
+  font-size: 3.5rem;
+  border-radius: 10px;
 }
 
 .player {
@@ -80,4 +81,16 @@ h2 {
   top: 29rem;
   left: 50%;
   transform: translateX(-50%);
+}
+
+.alert {
+  color: #cc7351;
+  position: absolute;
+  top: 34rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.hidden {
+  display: none;
 }

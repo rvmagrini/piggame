@@ -11,6 +11,7 @@ const newgame = document.querySelector(".newgame");
 const dice = document.querySelector(".dice");
 const roll = document.querySelector(".roll");
 const hold = document.querySelector(".hold");
+const alert = document.querySelector(".alert");
 
 let currentScore, scores, activePlayer;
 
@@ -32,7 +33,8 @@ newgame.addEventListener("click", initial);
 
 // Switch Player
 const switchPlayer = () => {
-  console.log("switched");
+  document.querySelector(`.h2player${activePlayer}`).style.backgroundColor =
+    "#96bb7c";
   activePlayer = activePlayer === 0 ? 1 : 0;
 };
 
@@ -41,6 +43,7 @@ roll.addEventListener("click", function () {
   const random = Math.floor(Math.random() * 6 + 1);
   dice.src = `img/dice${random}.png`;
   dice.classList.remove("hidden");
+  alert.textContent = "";
   if (random === 1) {
     currentScore = 0;
     document.querySelector(
@@ -62,14 +65,15 @@ hold.addEventListener("click", function () {
       scores[activePlayer];
     document.querySelector(`.current${activePlayer}`).textContent = 0;
 
+    // Finish game
+    if (scores[activePlayer] >= 100) {
+      console.log("you won");
+      dice.classList.add("hidden");
+    }
     currentScore = 0;
     dice.classList.add("hidden");
     switchPlayer();
   } else {
-    console.log("roll the dice");
-  }
-
-  if (scores[activePlayer] >= 100) {
-    console.log("you win");
+    alert.textContent = "ROLL THE DICE";
   }
 });
