@@ -33,7 +33,7 @@ section {
 }
 
 .active {
-  border: 2px solid #96bb7c;
+  border: 7px solid #96bb7c;
 }
 
 .player {
@@ -83,12 +83,22 @@ section {
   transform: translateX(-50%);
 }
 
-.dice {
+.dicediv {
+  padding: 3px;
   position: absolute;
   top: 20rem;
   left: 50%;
   transform: translateX(-50%);
   width: 110px;
+  border-radius: 10px;
+}
+
+.switchdice {
+  background-color: #cc7351;
+}
+
+.dice {
+  width: 100px;
 }
 
 .roll {
@@ -115,7 +125,7 @@ section {
 }
 
 .winner {
-  border: 5px solid #d89216;
+  border: 10px solid #d89216;
 }
 
 .hidden {

@@ -9,6 +9,7 @@ const current0 = document.querySelector(".current0");
 const current1 = document.querySelector(".current1");
 const newgame = document.querySelector(".newgame");
 const dice = document.querySelector(".dice");
+const dicediv = document.querySelector(".dicediv");
 const roll = document.querySelector(".roll");
 const hold = document.querySelector(".hold");
 const alert = document.querySelector(".alert");
@@ -56,6 +57,7 @@ const rolldice = () => {
     const random = Math.floor(Math.random() * 6 + 1);
     dice.src = `img/dice${random}.png`;
     dice.classList.remove("hidden");
+    dicediv.classList.remove("switchdice");
     alert.textContent = "";
     if (random === 1) {
       currentScore = 0;
@@ -63,6 +65,8 @@ const rolldice = () => {
         `.current${activePlayer}`
       ).textContent = currentScore;
       switchPlayer();
+      dicediv.classList.add("switchdice");
+      alert.textContent = "PLAYER SWITCHED";
     } else {
       currentScore += random;
       document.querySelector(
