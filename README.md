@@ -10,5 +10,5 @@ Each turn, a player repeatedly rolls a dice until either a 1 is rolled or the pl
 
 The first player to score 100 or more points wins.
 ***
-[PLAY](https://rvmagrini.github.io/piggame/)
+# [PLAY](https://rvmagrini.github.io/piggame/)
 ***
